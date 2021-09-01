@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { Post, PostComments } from 'src/app/models/post.model';
 
 @Component({
   selector: 'dialog-post',
@@ -7,12 +9,15 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
   styleUrls: ['./dialog-post.component.scss']
 })
 export class DialogPostComponent implements OnInit {
-  datosComments: any;
+  datosComments!: any;
+  displayedColumns = ['name', 'email', 'body', 'id', 'postId'];
+  dataSource = new MatTableDataSource<PostComments>();
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.datosComments = this.data;
+    this.dataSource.data = this.data
+    console.log(this.dataSource.data);
   }
 
 }

@@ -1,0 +1,13 @@
+<form [formGroup]="form">
+  <div>
+    <mat-form-field>
+      <input matInput formControlName="title" placeholder="Titulo" type="text">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput formControlName="body" placeholder="Body" type="text">
+    </mat-form-field>
+  </div>
+  <button mat-button (click)="enviarPost()">Enviar</button>
+</form>

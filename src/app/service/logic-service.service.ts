@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Input, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TablePostComponent } from '../components/table-post/table-post.component';
 import { Post } from '../models/post.model';
 
 @Injectable({

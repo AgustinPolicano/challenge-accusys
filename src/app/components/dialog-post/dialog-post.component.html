@@ -1,1 +1,27 @@
-{{data}}
+<mat-table #table [dataSource]="dataSource">
+
+  <ng-container matColumnDef="body">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Cuerpo </mat-header-cell>
+    <mat-cell *matCellDef="let postComments"> {{ postComments.body }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+    <mat-cell *matCellDef="let postComments"> {{ postComments.email }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+    <mat-cell *matCellDef="let postComments"> {{ postComments.id }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+    <mat-cell *matCellDef="let postComments"> {{ postComments.name }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="postId">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Post Id </mat-header-cell>
+    <mat-cell *matCellDef="let postComments"> {{ postComments.postId }} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
