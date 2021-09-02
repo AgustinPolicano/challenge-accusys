@@ -4,17 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
-import { ListadoPostComponent } from './listado-post.component';
-import { TablePostComponent } from './table-post/table-post.component';
+import { TablePostComponent } from './table-post.component';
 
 
 @NgModule({
-    declarations: [ListadoPostComponent, TablePostComponent],
+    declarations: [TablePostComponent],
     imports: [
         BrowserModule,
         CommonModule,
@@ -26,9 +26,10 @@ import { TablePostComponent } from './table-post/table-post.component';
         MatInputModule,
         FormsModule,
         ReactiveFormsModule,
-        MatSortModule
+        MatSortModule,
+        MatIconModule
     ],
-    exports: [ListadoPostComponent],
+    exports: [TablePostComponent],
     providers: [],
 })
-export class ListadoPostModule { }
+export class TablePostModule { }

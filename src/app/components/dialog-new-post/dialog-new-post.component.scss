@@ -1,0 +1,18 @@
+.flex-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-title{}
+
+.button-sumbit{
+    width: 50%;
+   font-family: "Roboto";
+   color: white;
+   text-align: center;
+}
+.pos-button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

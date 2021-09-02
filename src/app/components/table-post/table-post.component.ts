@@ -8,12 +8,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Post } from 'src/app/models/post.model';
 import { LogicService } from 'src/app/service/logic-service.service';
-import { DialogNewPostComponent } from '../../dialog-new-post/dialog-new-post.component';
-import { DialogPostComponent } from '../../dialog-post/dialog-post.component';
+import { DialogNewPostComponent } from '../dialog-new-post/dialog-new-post.component';
+import { DialogPostComponent } from '../dialog-post/dialog-post.component';
 
 @Component({
   selector: 'table-post',
   templateUrl: './table-post.component.html',
+  styleUrls: ['./table-post.component.scss']
 })
 export class TablePostComponent implements OnInit {
   dataSource = new MatTableDataSource<Post>();
@@ -35,11 +36,13 @@ export class TablePostComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPost();
+    //Metodo para filtrar por ID
     this.idFiltro.valueChanges.subscribe(positionFilterValue => {
       this.valoresFiltrados['id'] = positionFilterValue;
       this.dataSource.filter = JSON.stringify(this.valoresFiltrados);
     });
-    this.dataSource.filterPredicate = this.customFilterPredicate();
+    this.dataSource.filterPredicate = this.filtroCustom();
+
     this.dataSource.paginator = this.paginator;
     //Traduccion del paginator a ES
     this.paginator._intl.itemsPerPageLabel = "Posts por pagina";
@@ -51,16 +54,18 @@ export class TablePostComponent implements OnInit {
   }
 
 
-  customFilterPredicate() {
-    const myFilterPredicate = (data: Post, filter: string): boolean => {
+
+
+  filtroCustom() {
+    const filtroDedicado = (data: Post, filter: string): boolean => {
       let searchString = JSON.parse(filter);
       return data.id.toString().trim().indexOf(searchString.id) !== -1
     }
-    return myFilterPredicate;
+    return filtroDedicado;
   }
 
-
-
+/*   Obtengo la data del userId y la igualo a una variable, 
+  llamo a la funcion del get y le paso la data al DialogPostComponent */
 
   openDialog(post: Post) {
     this.userId = post.userId;
@@ -72,6 +77,8 @@ export class TablePostComponent implements OnInit {
       }
     )
   }
+
+//Dialog para el nuevo Post
 
   dialogPostNew(){
     this.dialog.open(DialogNewPostComponent)
@@ -89,6 +96,9 @@ export class TablePostComponent implements OnInit {
     return `${startIndex + 1} - ${endIndex} De ${length}`;
   }
 
+/* Llamo a la funcion de la logic que se encarga del get y le paso el array que devuelve al dataSource de la mat-table,
+tambien inicializo el sort */
+
   getPost() {
     this.logic.getPost().subscribe(
       datos => {
@@ -97,6 +107,8 @@ export class TablePostComponent implements OnInit {
       }
     );
   }
+
+/*   Obtengo la data de los coments con el userId que handleo en el dialog de dialog openDialog() */
 
   getComments(): Observable<Post[]> {
     let commentsApi = 'https://jsonplaceholder.typicode.com/posts/' + this.userId + '/comments'

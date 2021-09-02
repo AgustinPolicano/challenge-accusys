@@ -1,13 +1,21 @@
 <form [formGroup]="form">
-  <div>
-    <mat-form-field>
-      <input matInput formControlName="title" placeholder="Titulo" type="text">
-    </mat-form-field>
+  <div class="flex-form">
+    <div class="form-title">
+      <mat-form-field>
+        <input matInput formControlName="title" placeholder="Titulo" type="text" required>
+      </mat-form-field>
+    </div>
+    <div class="form-body">
+      <mat-form-field>
+        <textarea matInput formControlName="body" placeholder="Body" type="text" required></textarea>
+      </mat-form-field>
+    </div>
   </div>
-  <div>
-    <mat-form-field>
-      <input matInput formControlName="body" placeholder="Body" type="text">
-    </mat-form-field>
+  <div class="pos-button">
+    <button mat-raised-button color="primary" mat-button (click)="enviarPost()" [disabled]="form.invalid"
+      class="button-sumbit">
+      <mat-icon>done</mat-icon>
+      Realizar post
+    </button>
   </div>
-  <button mat-button (click)="enviarPost()">Enviar</button>
 </form>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { LogicService } from 'src/app/service/logic-service.service';
 
 @Component({
@@ -17,12 +18,16 @@ export class DialogNewPostComponent implements OnInit {
   });
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private logic: LogicService) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private logic: LogicService, public dialog: MatDialog) {
 
   }
 
   ngOnInit() {
   }
+
+ /*  Uso el metodo post para mandar el formArray, seguido a eso me suscribo a los cambios y hago una arrow
+  function que se encargue de pasarle los valores del array a mi variable y esta la muestro en un alert, 
+  una vez mostrado el alert se cierra el dialog */
 
   enviarPost() {
     try {
@@ -30,7 +35,8 @@ export class DialogNewPostComponent implements OnInit {
         resultado => {
           this.dataId = resultado;
           console.log(this.dataId);
-          return alert('Su id de post es ' + this.dataId.id )
+          alert('Su id de post es ' + this.dataId.id )
+          return this.dialog.closeAll()
         }
         
       )
