@@ -1,48 +1,56 @@
-<div class="flex-header">
-    <div class="header-title">
-        Listado de Post
+    <div class="">
+        <mat-toolbar color="primary">Listado de Post
+            <span class="example-spacer"></span>
+            <div class="flex-header">
+                <button mat-raised-button color="warn">
+                    <mat-icon matSuffix>filter_list</mat-icon>
+                    <input matInput [formControl]="idFiltro" placeholder="Filtrar por ID">
+                </button>
+                <button mat-raised-button color="warn" mat-button (click)="dialogPostNew()">
+                    <mat-icon>add</mat-icon>
+                    Nuevo post
+                </button>
+                <div class="button-pos">
+                    <button *ngIf="componentCssClass === 'dark-theme' " mat-mini-fab color="warn" (click)="onSetTheme('light-theme')">
+                        <mat-icon>light_mode</mat-icon>
+                      </button>
+                    <button *ngIf="componentCssClass === 'light-theme' " mat-mini-fab color="warn" (click)="onSetTheme('dark-theme')">
+                        <mat-icon>dark_mode</mat-icon>
+                      </button>
+                </div>   
+            </div>
+        </mat-toolbar>
+        <div class="container-posts">
+            <mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="userId">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> UserId </th>
+                    <td mat-cell *matCellDef="let post"> {{post.userId}} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id
+                    </th>
+                    <td mat-cell *matCellDef="let post"> {{post.id}} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
+                    <td mat-cell *matCellDef="let post"> {{post.title}} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="body">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Body </th>
+                    <td mat-cell *matCellDef="let post"> {{post.body}} </td>
+                </ng-container>
+        
+        
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr (click)="openDialog(row)" style="cursor: pointer;" mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </mat-table>
+        
+            <div class="paginator-header">
+                <mat-paginator [pageSizeOptions]="[5,10,15,25]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
     </div>
-    <div>
-        <button mat-raised-button color="primary">
-            <mat-icon matSuffix>filter_list</mat-icon>
-            <input matInput [formControl]="idFiltro" placeholder="Filtrar por ID">
-        </button>
-    </div>
-    <div>
-        <button mat-raised-button color="primary" mat-button (click)="dialogPostNew()">
-            <mat-icon>add</mat-icon>
-            Nuevo post
-        </button>
-    </div>
-</div>
-<mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="userId">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef> UserId </th>
-        <td mat-cell *matCellDef="let post"> {{post.userId}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id
-        </th>
-        <td mat-cell *matCellDef="let post"> {{post.id}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
-        <td mat-cell *matCellDef="let post"> {{post.title}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="body">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Body </th>
-        <td mat-cell *matCellDef="let post"> {{post.body}} </td>
-    </ng-container>
-
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr (click)="openDialog(row)" style="cursor: pointer;" mat-row *matRowDef="let row; columns: displayedColumns;">
-    </tr>
-</mat-table>
-
-<div class="paginator-header">
-    <mat-paginator [pageSizeOptions]="[5,10,15,25]" showFirstLastButtons></mat-paginator>
-</div>

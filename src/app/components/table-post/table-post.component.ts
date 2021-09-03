@@ -1,6 +1,7 @@
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,6 +21,7 @@ export class TablePostComponent implements OnInit {
   dataSource = new MatTableDataSource<Post>();
   userId!: number;
   idFiltro = new FormControl();
+  bgHandler!: number;
   valoresFiltrados = {
     id: ''
   };
@@ -27,8 +29,13 @@ export class TablePostComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private logic: LogicService, public dialog: MatDialog, private http: HttpClient) {
+  @HostBinding('class') componentCssClass: any;
 
+
+  constructor(private logic: LogicService, public dialog: MatDialog, private http: HttpClient, public overlayContainer: OverlayContainer,
+    private elementRef: ElementRef) {
+    this.bgHandler = 1;
+    this.componentCssClass = 'light-theme';
   }
 
 
@@ -64,8 +71,8 @@ export class TablePostComponent implements OnInit {
     return filtroDedicado;
   }
 
-/*   Obtengo la data del userId y la igualo a una variable, 
-  llamo a la funcion del get y le paso la data al DialogPostComponent */
+  /*   Obtengo la data del userId y la igualo a una variable, 
+    llamo a la funcion del get y le paso la data al DialogPostComponent */
 
   openDialog(post: Post) {
     this.userId = post.userId;
@@ -78,9 +85,9 @@ export class TablePostComponent implements OnInit {
     )
   }
 
-//Dialog para el nuevo Post
+  //Dialog para el nuevo Post
 
-  dialogPostNew(){
+  dialogPostNew() {
     this.dialog.open(DialogNewPostComponent)
   }
 
@@ -96,8 +103,8 @@ export class TablePostComponent implements OnInit {
     return `${startIndex + 1} - ${endIndex} De ${length}`;
   }
 
-/* Llamo a la funcion de la logic que se encarga del get y le paso el array que devuelve al dataSource de la mat-table,
-tambien inicializo el sort */
+  /* Llamo a la funcion de la logic que se encarga del get y le paso el array que devuelve al dataSource de la mat-table,
+  tambien inicializo el sort */
 
   getPost() {
     this.logic.getPost().subscribe(
@@ -108,14 +115,27 @@ tambien inicializo el sort */
     );
   }
 
-/*   Obtengo la data de los coments con el userId que handleo en el dialog de dialog openDialog() */
+  /*   Obtengo la data de los coments con el userId que handleo en el dialog de dialog openDialog() */
 
   getComments(): Observable<Post[]> {
     let commentsApi = 'https://jsonplaceholder.typicode.com/posts/' + this.userId + '/comments'
     return this.http.get<Post[]>(commentsApi);
   }
 
+  /*  Funcion que se encarga de cambiar de themes de mat-angular, ademas como no logre aplicarle background body desde la misma theme de
+   angular handlee una logica que se encarga de cambiar el body desde elementRef */
 
+  onSetTheme(e: string) {
+    this.bgHandler++
+    this.overlayContainer.getContainerElement().classList.add(e);
+    this.componentCssClass = e;
+    if (this.bgHandler % 2 == 0) {
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#212121';
+    } else {
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fff8e1';
+    }
 
+  }
 
 }
+

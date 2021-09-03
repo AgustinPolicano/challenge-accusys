@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { DialogNewPostComponent } from './components/dialog-new-post/dialog-new-post.component';
 import { DialogPostComponent } from './components/dialog-post/dialog-post.component';
 import { TablePostModule } from './components/table-post/table-post.module';
+import { LogicService } from './service/logic-service.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { TablePostModule } from './components/table-post/table-post.module';
     MatIconModule,
     TablePostModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [LogicService, HttpClientModule]
 })
 export class AppModule { }

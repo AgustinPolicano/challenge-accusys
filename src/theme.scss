@@ -1,0 +1,32 @@
+@import "../node_modules/@angular/material/theming";
+@include mat-core();
+
+$primary: mat-palette($mat-cyan, 600);
+$warn: mat-palette($mat-yellow, 50);
+$accent: mat-palette($mat-amber, 50);
+
+$primary-dark: mat-palette($mat-yellow, 300);
+$warn-dark: mat-palette($mat-purple, 600);
+$accent-dark: mat-palette($mat-grey, 900);
+
+$theme: mat-light-theme($primary, $warn, $accent);
+$theme-dark: mat-dark-theme($primary-dark, $warn-dark, $accent-dark);
+
+
+@include angular-material-theme($theme);
+
+
+    .light-theme{
+        @include angular-material-theme($theme);
+ 
+    }
+
+
+
+
+    .dark-theme{
+        @include angular-material-theme($theme-dark);
+ 
+    }
+
+

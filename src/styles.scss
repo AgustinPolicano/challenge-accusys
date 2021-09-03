@@ -1,28 +1,8 @@
-@use '~@angular/material' as mat;
-
-@include mat.core();
-
-$challenge-accusys-primary: mat.define-palette(mat.$indigo-palette);
-$challenge-accusys-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-$challenge-accusys-warn: mat.define-palette(mat.$red-palette);
-
-$challenge-accusys-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $challenge-accusys-primary,
-      accent: $challenge-accusys-accent,
-      warn: $challenge-accusys-warn,
-    ),
-  )
-);
-
-@include mat.all-component-themes($challenge-accusys-theme);
-
+@import "theme.scss";
 html,
 body {
   height: 100%;
-  background-color: #f5f5f5;
+  background-color: #fff8e1  ;
 }
 body {
   margin: 0;
@@ -41,20 +21,11 @@ body {
   src: url("./assets/fonts/Elephant-PersonalUse.ttf");
 }
 
-
-.mat-table {
-  border-radius: 15px;
-  overflow: hidden !important;
-}
-table {
-}
 th.mat-header-cell,
 td.mat-cell,
 td.mat-footer-cell {
   padding: 10px !important;
 }
-
-
 
 .mat-form-field-infix {
   width: 300px !important;
@@ -62,11 +33,6 @@ td.mat-footer-cell {
 
 .button-sumbit{
   width: 80%;
-}
-
-.mat-row:hover {
-  transition: 0.5s;
-  background-color: #f5f5f5;
 }
 
 th{
