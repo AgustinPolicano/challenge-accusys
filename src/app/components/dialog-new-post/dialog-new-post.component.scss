@@ -14,3 +14,13 @@
     display: flex;
     justify-content: center;
 }
+
+
+@media (max-width: 480px) {
+    .mat-form-field{
+        width: 100%;
+    }
+    .button-sumbit{
+        width: 75%;
+    }
+}

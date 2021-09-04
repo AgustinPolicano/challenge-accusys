@@ -10,7 +10,7 @@ import { Post, PostComments } from 'src/app/models/post.model';
 })
 export class DialogPostComponent implements OnInit {
   datosComments!: any;
-  displayedColumns = ['name', 'email', 'body', 'id', 'postId'];
+  displayedColumns = ['name', 'email', 'postId', 'id', 'body'];
   dataSource = new MatTableDataSource<PostComments>();
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any) { }

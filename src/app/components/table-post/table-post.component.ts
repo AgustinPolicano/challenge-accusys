@@ -20,6 +20,7 @@ import { DialogPostComponent } from '../dialog-post/dialog-post.component';
 export class TablePostComponent implements OnInit {
   dataSource = new MatTableDataSource<Post>();
   userId!: number;
+  toggleControl = new FormControl(false);
   idFiltro = new FormControl();
   bgHandler!: number;
   valoresFiltrados = {
@@ -88,7 +89,8 @@ export class TablePostComponent implements OnInit {
   //Dialog para el nuevo Post
 
   dialogPostNew() {
-    this.dialog.open(DialogNewPostComponent)
+    this.dialog.open(DialogNewPostComponent, {
+    })
   }
 
 

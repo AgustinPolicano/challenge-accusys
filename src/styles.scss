@@ -39,3 +39,29 @@ th{
   font-size: 14px !important;
 
 }
+
+.mat-elevation-z8 {    
+  overflow-x: auto;
+ }
+
+ 
+@media (max-width: 480px) {
+
+  .mat-dialog-container{
+    width: 400px !important;
+  }
+.mat-cell{
+    font-size: 10px;
+
+
+ 
+}
+}
+
+
+//Codigo css que se encarga de poder scrollear con el dialog Post 
+.cdk-global-overlay-wrapper {
+  pointer-events: auto !important; 
+  overflow-y: scroll !important;
+  z-index: auto !important; 
+}

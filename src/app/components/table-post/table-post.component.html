@@ -21,7 +21,7 @@
             </div>
         </mat-toolbar>
         <div class="container-posts">
-            <mat-table [dataSource]="dataSource" matSort>
+            <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
                 <ng-container matColumnDef="userId">
                     <th mat-header-cell mat-sort-header *matHeaderCellDef> UserId </th>
                     <td mat-cell *matCellDef="let post"> {{post.userId}} </td>
